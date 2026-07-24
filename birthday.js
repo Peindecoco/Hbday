@@ -5,9 +5,10 @@ const hintText = document.getElementById('hintText');
 const questionCard = document.getElementById('questionCard');
 const celebration = document.getElementById('celebration');
 
-const maxDodges = 4;
+const maxDodges = 10;
 let dodgeCount = 0;
 let canClickYes = false;
+let lastPosition = null;
 
 function moveYesButton() {
   if (canClickYes) return;
@@ -18,11 +19,23 @@ function moveYesButton() {
   const maxLeft = Math.max(stageRect.width - buttonRect.width, 0);
   const maxTop = Math.max(stageRect.height - buttonRect.height, 0);
 
-  const nextLeft = Math.floor(Math.random() * maxLeft);
-  const nextTop = Math.floor(Math.random() * maxTop);
+  const minimumTravel = Math.min(180, Math.max(stageRect.width, stageRect.height) * 0.35);
+  let nextLeft = 0;
+  let nextTop = 0;
+
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    nextLeft = Math.floor(Math.random() * maxLeft);
+    nextTop = Math.floor(Math.random() * maxTop);
+
+    if (!lastPosition) break;
+
+    const travelDistance = Math.hypot(nextLeft - lastPosition.left, nextTop - lastPosition.top);
+    if (travelDistance >= minimumTravel) break;
+  }
 
   yesButton.style.left = `${nextLeft}px`;
   yesButton.style.top = `${nextTop}px`;
+  lastPosition = { left: nextLeft, top: nextTop };
   hintText.textContent = `Almost! Catch it ${Math.max(maxDodges - dodgeCount, 0)} more time${maxDodges - dodgeCount === 1 ? '' : 's'} 💕`;
 
   if (dodgeCount >= maxDodges) {
