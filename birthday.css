@@ -94,8 +94,9 @@ h2 {
 
 .answer-stage {
   position: relative;
-  min-height: 150px;
-  margin-top: 42px;
+  width: min(100%, 600px);
+  min-height: 280px;
+  margin: 42px auto 0;
 }
 
 .answer-button {
@@ -114,12 +115,12 @@ h2 {
 }
 
 .yes-button {
-  left: calc(50% - 150px);
+  left: 8%;
   background: linear-gradient(135deg, var(--hot-pink), var(--purple));
 }
 
 .no-button {
-  left: calc(50% + 20px);
+  right: 8%;
   background: linear-gradient(135deg, #94a3b8, #475569);
 }
 
@@ -180,19 +181,20 @@ h2 {
   }
 
   .answer-stage {
-    min-height: 210px;
+    min-height: 300px;
   }
 
   .answer-button {
     min-width: 120px;
   }
 
-  .yes-button,
-  .no-button {
+  .yes-button {
     left: calc(50% - 60px);
   }
 
   .no-button {
-    top: 126px;
+    left: calc(50% - 60px);
+    right: auto;
+    top: 206px;
   }
 }
