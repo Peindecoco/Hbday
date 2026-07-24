@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="birthday.css">
+</head>
+<body>
+  <main class="birthday-page">
+        <section class="birthday-card" id="questionCard" aria-labelledby="birthdayQuestion">
+            <p class="eyebrow">A very important question...</p>
+            <h1 id="birthdayQuestion">Is it your birthday?</h1>
+            <p class="hint" id="hintText">Try to catch the correct answer 💖</p>
+
+            <div class="answer-stage" id="answerStage">
+                <button class="answer-button yes-button" id="yesButton" type="button" aria-describedby="hintText">Yes</button>
+                <button class="answer-button no-button" id="noButton" type="button">No</button>
+            </div>
+            </section>
+
+        <section class="birthday-card celebration hidden" id="celebration" aria-live="polite">
+            <p class="eyebrow">You caught it!</p>
+            <h2>Happy Birthday! 🎂</h2>
+            <p>Wishing you a day full of smiles, sweet surprises, and all the love you deserve.</p>
+            <div class="balloons" aria-hidden="true">
+                <span>🎈</span><span>🎉</span><span>🎁</span><span>✨</span><span>🎈</span>
+            </div>
+        </section>
+    </main>
+<script src="birthday.js"></script>
+</body>
+</html>
