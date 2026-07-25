@@ -12,6 +12,58 @@ let lastPosition = null;
 
 function moveYesButton() {
   if (canClickYes) return;
+  const birthdayMelody = [
+  ['G4', 0.35], ['G4', 0.35], ['A4', 0.7], ['G4', 0.7], ['C5', 0.7], ['B4', 1.2],
+  ['G4', 0.35], ['G4', 0.35], ['A4', 0.7], ['G4', 0.7], ['D5', 0.7], ['C5', 1.2],
+  ['G4', 0.35], ['G4', 0.35], ['G5', 0.7], ['E5', 0.7], ['C5', 0.7], ['B4', 0.7], ['A4', 1.2],
+  ['F5', 0.35], ['F5', 0.35], ['E5', 0.7], ['C5', 0.7], ['D5', 0.7], ['C5', 1.4],
+];
+
+const noteFrequencies = {
+  G4: 392,
+  A4: 440,
+  B4: 493.88,
+  C5: 523.25,
+  D5: 587.33,
+  E5: 659.25,
+  F5: 698.46,
+  G5: 783.99,
+};
+
+let audioContext;
+
+function playBirthdaySong() {
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+  if (!AudioContext) {
+    musicStatus.textContent = 'Your browser could not play the song, but imagine the sweetest Happy Birthday tune 🎶';
+    return;
+  }
+
+  audioContext = audioContext || new AudioContext();
+  const startTime = audioContext.currentTime + 0.08;
+  let songTime = startTime;
+
+  birthdayMelody.forEach(([note, duration]) => {
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = 'triangle';
+    oscillator.frequency.setValueAtTime(noteFrequencies[note], songTime);
+    gain.gain.setValueAtTime(0.0001, songTime);
+    gain.gain.exponentialRampToValueAtTime(0.2, songTime + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.0001, songTime + duration - 0.04);
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start(songTime);
+    oscillator.stop(songTime + duration);
+
+    songTime += duration;
+  });
+
+  musicStatus.textContent = 'Playing Happy Birthday for you 🎶';
+}
 
   dodgeCount += 1;
   const stageRect = answerStage.getBoundingClientRect();
@@ -51,6 +103,16 @@ function showCelebration() {
   if (!canClickYes) {
     moveYesButton();
     return;
+    function showCelebration() {
+  if (!canClickYes) {
+    moveYesButton();
+    return;
+  }
+
+  document.body.classList.add('birthday-unlocked');
+  questionCard.classList.add('hidden');
+  celebration.classList.remove('hidden');
+  playBirthdaySong();
   }
 
   document.body.classList.add('birthday-unlocked');
