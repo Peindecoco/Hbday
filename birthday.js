@@ -11,8 +11,7 @@ let canClickYes = false;
 let lastPosition = null;
 
 function moveYesButton() {
-  if (canClickYes) return;
-  const birthdayMelody = [
+    const birthdayMelody = [
   ['G4', 0.35], ['G4', 0.35], ['A4', 0.7], ['G4', 0.7], ['C5', 0.7], ['B4', 1.2],
   ['G4', 0.35], ['G4', 0.35], ['A4', 0.7], ['G4', 0.7], ['D5', 0.7], ['C5', 1.2],
   ['G4', 0.35], ['G4', 0.35], ['G5', 0.7], ['E5', 0.7], ['C5', 0.7], ['B4', 0.7], ['A4', 1.2],
@@ -64,6 +63,8 @@ function playBirthdaySong() {
 
   musicStatus.textContent = 'Playing Happy Birthday for you 🎶';
 }
+  if (canClickYes) return;
+
 
   dodgeCount += 1;
   const stageRect = answerStage.getBoundingClientRect();
