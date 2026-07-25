@@ -53,6 +53,7 @@ function showCelebration() {
     return;
   }
 
+  document.body.classList.add('birthday-unlocked');
   questionCard.classList.add('hidden');
   celebration.classList.remove('hidden');
 }
